@@ -35,4 +35,12 @@ public class Table {
         graphics.setColor(Color.white);
         graphics.fillRect(this.rectX, this.rectY, this.rectWidth, this.rectHeight);
     }
+
+    public int getRectX() {
+        return rectX;
+    }
+
+    public int getRectY() {
+        return rectY;
+    }
 }

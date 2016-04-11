@@ -1,5 +1,7 @@
 package GameObjects;
 
+import game.Table;
+
 import java.awt.*;
 import java.util.Vector;
 
@@ -10,12 +12,15 @@ public class Ball {
     public int x,y,velocityX,velocityY;
 
     private Rectangle rect;
-
-    public Ball(int x, int y, int velocityX , int velocityY) {
-        this.x = x;
+    public static boolean isRelease=false;
+private Table table;
+    public Ball( Table table) {
+        this.table=table;
+        this.x = table.g;
         this.y = y;
         this.velocityX=velocityX;
         this.velocityY=velocityY;
+
         rect=new Rectangle(this.x,this.y,20,20);
     }
     public void tick(){

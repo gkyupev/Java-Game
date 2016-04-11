@@ -38,7 +38,7 @@ private ArrayList<Bricks> totalBricks;
     public void init() {
         this.display = new Display(this.title, this.width, this.height);
         this.inputHandler = new InputHandler(this.display);
-this.background=ImageLoader.loadImage("/background.jpg");
+         this.background=ImageLoader.loadImage("/background.jpg");
         table = new Table();
         ball=new Ball(450,200,10,10);
         this.totalBricks = Bricks.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);

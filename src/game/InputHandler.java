@@ -1,5 +1,6 @@
 package game;
 
+import GameObjects.Ball;
 import display.Display;
 
 import java.awt.*;
@@ -35,6 +36,9 @@ public class InputHandler implements KeyListener{
            System.out.println("RIGHT"); // <-- debug
             Table.goingRight = true;
             Table.goingLeft = false;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            Ball.isRelease=true;
         }
 
     }
