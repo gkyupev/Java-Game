@@ -22,7 +22,7 @@ public class Ball {
 
        this.x+=velocityX;
        this.y+=velocityY;
-        if ((x > 790) || (x < 0)) {
+        if ((x >= 790) || (x <= 0)) {
             velocityX = velocityX * -1;
         }
         if ((y > 550) || (y < 0)) {
@@ -34,5 +34,7 @@ public class Ball {
 
         graf.setColor(Color.red);
         graf.fillOval(this.x,this.y,20,20);
-}
+
+    }
+
 }

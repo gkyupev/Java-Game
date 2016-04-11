@@ -12,27 +12,27 @@ public class InputHandler implements KeyListener{
         display.getCanvas().addKeyListener(this);
     }
 
-//    private Canvas canvas;
-//
-//    public InputHandler(Canvas canvas) {
-//        canvas.addKeyListener(this);
-//    }
+ //   private Canvas canvas;
+
+ //  public InputHandler(Canvas canvas) {
+  //      canvas.addKeyListener(this);
+  //  }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+   public void keyTyped(KeyEvent e) {
 
-    }
+   }
 
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_LEFT) {
-//            System.out.println("LEFT"); // <-- debug
+          System.out.println("LEFT"); // <-- debug
             Table.goingLeft = true;
             Table.goingRight = false;
-        } else if (code == KeyEvent.VK_RIGHT) {
-//            System.out.println("RIGHT"); // <-- debug
+        } if (code == KeyEvent.VK_RIGHT) {
+           System.out.println("RIGHT"); // <-- debug
             Table.goingRight = true;
             Table.goingLeft = false;
         }
