@@ -1,5 +1,6 @@
 package game;
 
+import GameObjects.Ball;
 import display.Display;
 import gfx.ImageLoader;
 
@@ -18,7 +19,7 @@ public class Game implements Runnable {
     private InputHandler inputHandler;
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
-
+    private Ball ball;
 //    public static Rectangle rectangle;
     public static Table table;
 
@@ -33,11 +34,12 @@ public class Game implements Runnable {
         this.inputHandler = new InputHandler(this.display);
 
         table = new Table();
+        ball=new Ball(450,200,10,10);
     }
 
     public void tick() {
         table.tick();
-
+      ball.tick();
     }
 
     public void render() {
@@ -57,6 +59,7 @@ public class Game implements Runnable {
 
         //this.graphics.fillRect(350, 550, 100, 20);
         table.render(graphics);
+         ball.render(graphics);
         //System.out.println("render");
 
         this.graphics.dispose();
