@@ -15,7 +15,7 @@ public class Game implements Runnable {
     private String title;
     private int width, height;
     private boolean isRunning;
-
+private ArrayList<Bricks> totalBricks;
     private Display display;
     private InputHandler inputHandler;
     private BufferStrategy bufferStrategy;
@@ -23,6 +23,7 @@ public class Game implements Runnable {
     private Ball ball;
     private int startPositionBricksX=50;
     private int getStartPositionBricksY=50;
+   private Image background;
     private int hightBricks=40;
     private int wightBricks=10;
 //    public static Rectangle rectangle;
@@ -37,9 +38,10 @@ public class Game implements Runnable {
     public void init() {
         this.display = new Display(this.title, this.width, this.height);
         this.inputHandler = new InputHandler(this.display);
-
+this.background=ImageLoader.loadImage("/background.jpg");
         table = new Table();
         ball=new Ball(450,200,10,10);
+        this.totalBricks = Bricks.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
     }
 
     public void tick() {
@@ -58,8 +60,8 @@ public class Game implements Runnable {
         this.graphics = this.bufferStrategy.getDrawGraphics();
         this.graphics.clearRect(0, 0, this.width, this.height);
 
-        this.graphics.drawImage(ImageLoader.loadImage("/background.jpg"), 0, 0, this.width, this.height, null);
-        ArrayList<Bricks> totalBricks = Bricks.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
+        this.graphics.drawImage(this.background, 0, 0, this.width, this.height, null);
+
 
         //Table t = new Table(100, 100, 20, 200);
         //this.graphics.fillRect(t.rectangle.x, t.rectangle.y, t.rectangle.width, t.rectangle.height);

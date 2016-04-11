@@ -8,7 +8,7 @@ public class Bricks {
     public  int x , y,wight,hight;
     public boolean isHit;
     public Rectangle boundigbox;
-
+private static Image img;
     public Bricks(int x, int y, int hight, int wight, boolean b) {
         this.x = x;
         this.y = y;
@@ -16,6 +16,7 @@ public class Bricks {
         this.wight=wight;
         this.isHit=b;
         this.boundigbox=new Rectangle(x,y,hight,wight);
+    this.img=ImageLoader.loadImage("/bricks.png");
     }
 
     public int getX() {
@@ -43,7 +44,7 @@ public class Bricks {
     }
     public static void drawBricks(Graphics g, ArrayList<Bricks> allBricks){
         for (int i = 0; i <allBricks.size() ; i++) {
-            g.drawImage(ImageLoader.loadImage("/bricks.png"),allBricks.get(i).getX(),allBricks.get(i).getY(),
+            g.drawImage(img,allBricks.get(i).getX(),allBricks.get(i).getY(),
                     allBricks.get(i).getHight(),allBricks.get(i).getWight(),null);
         }
     }
