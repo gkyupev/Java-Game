@@ -6,6 +6,7 @@ import gfx.ImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 public class Game implements Runnable {
 
@@ -20,6 +21,10 @@ public class Game implements Runnable {
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
     private Ball ball;
+    private int startPositionBricksX=50;
+    private int getStartPositionBricksY=50;
+    private int hightBricks=40;
+    private int wightBricks=10;
 //    public static Rectangle rectangle;
     public static Table table;
 
@@ -54,12 +59,15 @@ public class Game implements Runnable {
         this.graphics.clearRect(0, 0, this.width, this.height);
 
         this.graphics.drawImage(ImageLoader.loadImage("/background.jpg"), 0, 0, this.width, this.height, null);
+        ArrayList<Bricks> totalBricks = Bricks.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
+
         //Table t = new Table(100, 100, 20, 200);
         //this.graphics.fillRect(t.rectangle.x, t.rectangle.y, t.rectangle.width, t.rectangle.height);
 
         //this.graphics.fillRect(350, 550, 100, 20);
         table.render(graphics);
-         ball.render(graphics);
+        ball.render(graphics);
+        Bricks.drawBricks(graphics,totalBricks);
         //System.out.println("render");
 
         this.graphics.dispose();
