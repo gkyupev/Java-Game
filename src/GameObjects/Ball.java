@@ -16,24 +16,24 @@ public class Ball {
 private Table table;
     public Ball( Table table) {
         this.table=table;
-        this.x = table.g;
-        this.y = y;
-        this.velocityX=velocityX;
-        this.velocityY=velocityY;
+        this.x = table.getRectX()+40;
+        this.y =table.getRectY()-20;
+        this.velocityX = 10;
+        this.velocityY = 10;
 
         rect=new Rectangle(this.x,this.y,20,20);
     }
     public void tick(){
-
-       this.x+=velocityX;
-       this.y+=velocityY;
-        if ((x >= 790) || (x <= 0)) {
-            velocityX = velocityX * -1;
-        }
-        if ((y > 550) || (y < 0)) {
-            velocityY = velocityY * -1;
-        }
-
+if(isRelease) {
+    this.x += velocityX;
+    this.y -= velocityY;
+    if ((x >= 790) || (x <= 0)) {
+        velocityX = velocityX * -1;
+    }
+    if ((y > 550) || (y < 0)) {
+        velocityY = velocityY * -1;
+    }
+}
     }
     public void render(Graphics graf){
 

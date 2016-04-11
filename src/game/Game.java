@@ -40,7 +40,7 @@ private ArrayList<Bricks> totalBricks;
         this.inputHandler = new InputHandler(this.display);
          this.background=ImageLoader.loadImage("/background.jpg");
         table = new Table();
-        ball=new Ball(450,200,10,10);
+        ball=new Ball(this.table);
         this.totalBricks = Bricks.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
     }
 
