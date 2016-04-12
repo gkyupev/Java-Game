@@ -4,9 +4,10 @@ import java.awt.*;
 
 public class Table {
     private int rectX, rectY, rectWidth, rectHeight, velocity;
-
+private Rectangle boundingBox;
     public static boolean goingLeft;
     public static boolean goingRight;
+
 
     public Table() {
         this.rectX = 350;
@@ -14,7 +15,7 @@ public class Table {
         this.rectWidth = 100;
         this.rectHeight = 20;
         this.velocity = 30;
-
+         boundingBox=new Rectangle(this.rectX,this.rectY,this.rectWidth,this.rectHeight);
         goingLeft = false;
         goingRight = false;
     }
@@ -34,6 +35,7 @@ public class Table {
     public void render(Graphics graphics) {
         graphics.setColor(Color.white);
         graphics.fillRect(this.rectX, this.rectY, this.rectWidth, this.rectHeight);
+
     }
 
     public int getRectX() {
