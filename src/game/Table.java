@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Table {
     private int rectX, rectY, rectWidth, rectHeight, velocity;
-private Rectangle boundingBox;
+     private Rectangle boundingBox;
     public static boolean goingLeft;
     public static boolean goingRight;
 
@@ -21,6 +21,7 @@ private Rectangle boundingBox;
     }
 
     public void tick() {
+        this.boundingBox.setBounds(this.rectX, this.rectY, this.rectWidth, this.rectHeight);
         if (goingLeft && this.rectX > 0) { // 00000000000000000
 //            System.out.println("left"); // <-- debug
             this.rectX -= this.velocity;
@@ -40,6 +41,10 @@ private Rectangle boundingBox;
 
     public int getRectX() {
         return rectX;
+    }
+
+    public Rectangle getBoundingBox() {
+        return boundingBox;
     }
 
     public int getRectY() {
