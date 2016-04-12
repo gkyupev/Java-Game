@@ -13,7 +13,7 @@ public class Ball {
     public int x,y;
   private double velocityX,velocityY;
     private double velocityCorrection;
-    private Rectangle rect;
+    private Rectangle boundingBox;
     public static boolean isRelease=false;
 private Table table;
     public Ball( Table table) {
@@ -23,17 +23,22 @@ private Table table;
         this.velocityX = 10;
         this.velocityY = 10;
 
-        rect=new Rectangle(this.x,this.y,20,20);
+        boundingBox=new Rectangle(this.x,this.y,20,20);
     }
     public void tick(){
-if(isRelease) {
-    this.x += velocityX*velocityCorrection;
-    this.y -= velocityY*velocityCorrection;
+        this.boundingBox.setBounds(this.x, this.y, 20, 20);
+if(!isRelease) {
+    this.x = table.getRectX() + 40;
+    this.y = table.getRectY() - 20;
+}else{
+   bounseOfTable();
+    this.x += velocityX;
+    this.y -= velocityY;
     if ((x >= 790) || (x <= 0)) {
-       ve
+
         velocityX = velocityX * -1;
     }
-    if ((y > 550) || (y < 0)) {
+    if ( (y < 0)) {
         bounseOfTop();
     }
 }
@@ -47,11 +52,10 @@ if(isRelease) {
 public void bounseOfTop(){
     velocityY = velocityY * -1;
 }
-private void bounseOfTable(){
-    if(this.rect.contains(table.getBoundingBox()) || table.getBoundingBox().contains(this.rect)) {
-        this.velocityCorrection = (double)Math.abs(this.x-this.table.getRectX())/(double)25;
-   this.velocityX*=velocityCorrection;
-        this.velocityY/=velocityCorrection;
+     private void bounseOfTable(){
+    if(this.boundingBox.contains(table.getBoundingBox()) || table.getBoundingBox().contains(this.boundingBox)) {
+
+        this.velocityY*=-1;
     }
 
 
