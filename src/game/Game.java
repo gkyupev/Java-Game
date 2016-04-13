@@ -15,7 +15,7 @@ public class Game implements Runnable {
     private String title;
     private int width, height;
     private boolean isRunning;
-private ArrayList<Bricks> totalBricks;
+    public static int lives =3;
     private Display display;
     private InputHandler inputHandler;
     private BufferStrategy bufferStrategy;
@@ -23,7 +23,8 @@ private ArrayList<Bricks> totalBricks;
     private Ball ball;
     private int startPositionBricksX=50;
     private int getStartPositionBricksY=50;
-   private Image background;
+   private BrickWall wall;
+    private Image background;
     private int hightBricks=40;
     private int wightBricks=10;
 //    public static Rectangle rectangle;
@@ -36,17 +37,21 @@ private ArrayList<Bricks> totalBricks;
     }
 
     public void init() {
+       wall=new BrickWall();
+        wall.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
         this.display = new Display(this.title, this.width, this.height);
         this.inputHandler = new InputHandler(this.display);
          this.background=ImageLoader.loadImage("/background.jpg");
         table = new Table();
-        ball=new Ball(this.table);
-        this.totalBricks = Bricks.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
+        ball=new Ball(this.table,this.wall);
+
     }
 
     public void tick() {
-        table.tick();
+       table.tick();
       ball.tick();
+       wall.tick();
+
     }
 
     public void render() {
@@ -69,7 +74,7 @@ private ArrayList<Bricks> totalBricks;
         //this.graphics.fillRect(350, 550, 100, 20);
         table.render(graphics);
         ball.render(graphics);
-        Bricks.drawBricks(graphics,totalBricks);
+        wall.render(graphics);
         //System.out.println("render");
 
         this.graphics.dispose();
@@ -126,5 +131,12 @@ private ArrayList<Bricks> totalBricks;
             e.printStackTrace();
         }
     }
+//    private void ballHitBrick(){
+//      for (Bricks brick : wall.getWall()) {
+//        if (brick.boundingBox.contains(this.ball.getBoundingBox()) || this.ball.getBoundingBox().contains(brick.boundingBox)){
+//            brick.getHit();
+//        }
+//    }
+
 
 }

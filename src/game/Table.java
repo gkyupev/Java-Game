@@ -31,6 +31,7 @@ public class Table {
             this.rectX += this.velocity;
          //   System.out.println(this.rectX); // <-- debug
         }
+        this.boundingBox.setBounds(this.rectX, this.rectY, this.rectWidth, this.rectHeight);
     }
 
     public void render(Graphics graphics) {
