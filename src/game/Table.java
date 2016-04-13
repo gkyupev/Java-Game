@@ -14,7 +14,7 @@ public class Table {
         this.rectY = 550;
         this.rectWidth = 100;
         this.rectHeight = 20;
-        this.velocity = 30;
+        this.velocity = 20;
          boundingBox=new Rectangle(this.rectX,this.rectY,this.rectWidth,this.rectHeight);
         goingLeft = false;
         goingRight = false;
@@ -25,18 +25,18 @@ public class Table {
         if (goingLeft && this.rectX > 0) { // 00000000000000000
 //            System.out.println("left"); // <-- debug
             this.rectX -= this.velocity;
-            System.out.println(this.rectX); // <-- debug
+        //    System.out.println(this.rectX); // <-- debug
         } else if (goingRight && this.rectX < 700) {  // 0000000000000
 //            System.out.println("right"); // <-- debug
             this.rectX += this.velocity;
-            System.out.println(this.rectX); // <-- debug
+         //   System.out.println(this.rectX); // <-- debug
         }
     }
 
     public void render(Graphics graphics) {
         graphics.setColor(Color.white);
         graphics.fillRect(this.rectX, this.rectY, this.rectWidth, this.rectHeight);
-
+     graphics.drawRect(boundingBox.x,boundingBox.y,boundingBox.width,boundingBox.height);
     }
 
     public int getRectX() {
