@@ -35,6 +35,7 @@ if(!isRelease) {
     this.x += velocityX;
     this.y -= velocityY;
     if ((x >= 790) || (x <= 0)) {
+       // velocityX=10;
 
         velocityX = velocityX * -1;
     }
@@ -50,14 +51,15 @@ if(!isRelease) {
 
     }
 public void bounseOfTop(){
-    velocityY = velocityY * -1;
-}
-     private void bounseOfTable(){
-    if(this.boundingBox.contains(table.getBoundingBox()) || table.getBoundingBox().contains(this.boundingBox)) {
 
-        this.velocityY*=-1;
-    }
+    velocityY*=-1;
 
 
 }
+        private void bounseOfTable(){
+       if(this.boundingBox.contains(table.getBoundingBox()) || table.getBoundingBox().contains(this.boundingBox)) {
+       velocityCorrection=Math.abs((this.x+10)-(this.table.getRectX()+25));
+        velocityY*=-1;
+
 }
+}}
