@@ -7,4 +7,5 @@ public enum  GameState {
     MainMenu,
     PauseMenu,
     Game,
+    GameOver
 }

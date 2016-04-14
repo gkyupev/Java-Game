@@ -1,8 +1,10 @@
 package GameObjects;
 
+import UserInterface.GUI;
 import game.BrickWall;
 import game.Bricks;
 import game.Table;
+import gfx.Assets;
 
 import java.awt.*;
 
@@ -15,9 +17,10 @@ public class Ball {
     private double velocityX, velocityY;
     private double velocityCorrection;
     private Rectangle boundingBox;
-private BrickWall wall;
+    private BrickWall wall;
     public static boolean isRelease = false;
     private Table table;
+
 
     public Ball(Table table, BrickWall wall) {
         this.table = table;
@@ -27,21 +30,24 @@ private BrickWall wall;
         this.velocityY = 10;
         this.directionX = 1;
         this.directionY = -1;
-this.wall=wall;
+
+        this.wall = wall;
         boundingBox = new Rectangle(this.x, this.y, 20, 20);
     }
 
-    public Rectangle getBoundingBox() {
-        return boundingBox;
+
+    public int getY() {
+        return y;
     }
 
     public void tick() {
-bounceOfBrick();
+        bounceOfBrick();
         if (!isRelease) {
             this.x = table.getRectX() + 40;
             this.y = table.getRectY() - 20;
         } else {
             bounceOfTable();
+           fall();
             this.x += velocityX * directionX;
             this.y += velocityY * directionY;
 
@@ -59,9 +65,9 @@ bounceOfBrick();
     }
 
     public void render(Graphics graf) {
-
-        graf.setColor(Color.red);
-        graf.fillOval(this.x, this.y, 20, 20);
+        graf.drawImage(Assets.ball, this.x, this.y, 20, 20, null);
+//        graf.setColor(Color.red);
+//        graf.fillOval(this.x, this.y, 20, 20);
         graf.drawRect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
     }
 
@@ -79,21 +85,29 @@ bounceOfBrick();
             velocityCorrection = Math.abs((this.boundingBox.getMinX() + 10) - (this.table.getBoundingBox().getMinX() + 25));
 
             System.out.println(velocityCorrection);
-           // velocityY = 6;
+            // velocityY = 6;
             directionY = -1 * directionY;
             System.out.println(directionY);
             System.out.println(velocityY);
             System.out.println("col");
         }
     }
+
     private void bounceOfBrick() {
         for (Bricks brick : this.wall.getWall()) {
             if (this.boundingBox.intersects(brick.boundingBox) || brick.boundingBox.intersects(this.boundingBox)) {
                 brick.getHit();
-               directionY*=-1;
+                GUI.getInstance().setScores(brick.getScore());
+                directionY *= -1;
             }
 
         }
+    }
+    private void fall(){
+        if (y>600){
+            isRelease=false;
+            GUI.getInstance().setBalls();
 
+        }
     }
 }

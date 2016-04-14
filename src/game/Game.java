@@ -1,9 +1,7 @@
 package game;
 
 import GameObjects.Ball;
-import UserInterface.MainMenu;
-import UserInterface.MouseInput;
-import UserInterface.PauseMenu;
+import UserInterface.*;
 import display.Display;
 import gfx.Assets;
 import gfx.ImageLoader;
@@ -34,6 +32,7 @@ public class Game implements Runnable {
     private int wightBricks = 10;
     private MainMenu mainMenu;
     private PauseMenu pauseMenu;
+    private GameOver gameOver;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -53,6 +52,7 @@ public class Game implements Runnable {
         ball = new Ball(this.table, this.wall);
         mainMenu = new MainMenu();
         pauseMenu = new PauseMenu();
+        gameOver = new GameOver();
     }
 
     public void tick() {
@@ -60,13 +60,13 @@ public class Game implements Runnable {
             table.tick();
             ball.tick();
             wall.tick();
+            GUI.getInstance().tick();
         }
 
     }
 
     public void render() {
         this.bufferStrategy = this.display.getCanvas().getBufferStrategy();
-
         if (this.bufferStrategy == null) {
             this.display.getCanvas().createBufferStrategy(2); //    - test 1 or 3 for best work
             this.bufferStrategy = this.display.getCanvas().getBufferStrategy();
@@ -79,11 +79,14 @@ public class Game implements Runnable {
             table.render(graphics);
             ball.render(graphics);
             wall.render(graphics);
+            GUI.getInstance().render(graphics);
             if (State == GameState.PauseMenu) {
                 pauseMenu.render(graphics);
             }
         } else if (State == GameState.MainMenu) {
             mainMenu.render(graphics);
+        } else if (State == GameState.GameOver) {
+            gameOver.render(graphics);
         }
 
         this.graphics.dispose();
@@ -130,6 +133,7 @@ public class Game implements Runnable {
 
         this.stop();
     }
+
 
     public synchronized void start() {
         thread = new Thread(this);

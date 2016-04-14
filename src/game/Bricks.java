@@ -10,6 +10,7 @@ public class Bricks {
     public Rectangle boundingBox;
      protected static Image img;
     protected int hitPoint;
+    protected  int score =10;
     public Bricks(int x, int y, int hight, int wight) {
         this.x = x;
         this.y = y;
@@ -17,13 +18,15 @@ public class Bricks {
         this.hight=hight;
         this.wight=wight;
 
+
         this.boundingBox=new Rectangle(x,y,wight,hight);
 
     this.img=ImageLoader.loadImage("/bricks.png");
     }
 
-
-
+    public int getScore() {
+        return score;
+    }
 
     public int getHitPoint() {
         return hitPoint;
