@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class BrickWall {
     private ArrayList<Bricks> wall;
-private int count =0;
+
     public BrickWall() {
         this.wall = new ArrayList<>();
     }
@@ -19,10 +19,10 @@ private int count =0;
 
     public void tick() {
      if (wall.size()==0){
-         count++;
+
      }
         for (int i = 0; i <wall.size() ; i++) {
-            if (wall.get(i).getHitPoint()==0){
+            if (wall.get(i).getHitPoint()<=0){
                 wall.remove(i);
             }
         }
@@ -49,7 +49,7 @@ private int count =0;
                 numberBrickOnLine -= 2;
                 countLine = 0;
             }
-            wall.add(new Bricks(x, y, wight, hight));
+             wall.add(new Bricks(x, y, wight, hight));
 
             x += 45;
             countLine++;

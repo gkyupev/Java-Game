@@ -3,13 +3,13 @@ package game;
 import GameObjects.Ball;
 import UserInterface.MainMenu;
 import UserInterface.MouseInput;
+import UserInterface.PauseMenu;
 import display.Display;
 import gfx.Assets;
 import gfx.ImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 
 public class Game implements Runnable {
     public static int width, height;
@@ -32,7 +32,8 @@ public class Game implements Runnable {
     private Image background;
     private int hightBricks = 40;
     private int wightBricks = 10;
-private MainMenu mainMenu ;
+    private MainMenu mainMenu;
+    private PauseMenu pauseMenu;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -50,7 +51,8 @@ private MainMenu mainMenu ;
         this.background = ImageLoader.loadImage("/background.jpg");
         table = new Table();
         ball = new Ball(this.table, this.wall);
-      mainMenu=new MainMenu();
+        mainMenu = new MainMenu();
+        pauseMenu = new PauseMenu();
     }
 
     public void tick() {
@@ -72,14 +74,16 @@ private MainMenu mainMenu ;
 
         this.graphics = this.bufferStrategy.getDrawGraphics();
         this.graphics.clearRect(0, 0, this.width, this.height);
-        if (State == GameState.Game) {
+        if (State == GameState.Game || State == GameState.PauseMenu) {
             this.graphics.drawImage(this.background, 0, 0, this.width, this.height, null);
             table.render(graphics);
             ball.render(graphics);
             wall.render(graphics);
-        }else if(State==GameState.MainMenu){
+            if (State == GameState.PauseMenu) {
+                pauseMenu.render(graphics);
+            }
+        } else if (State == GameState.MainMenu) {
             mainMenu.render(graphics);
-
         }
 
         this.graphics.dispose();

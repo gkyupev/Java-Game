@@ -41,7 +41,13 @@ public class InputHandler implements KeyListener{
             Ball.isRelease=true;
         }
         if (code == KeyEvent.VK_ESCAPE) {
-            System.exit(0);
+         //   System.exit(0);
+            if (Game.State!=GameState.PauseMenu){
+                Game.State=GameState.PauseMenu;
+            }else{
+                Game.State=GameState.Game;
+            }
+
         }
 
     }

@@ -14,7 +14,7 @@ public class MainMenu {
     public Rectangle quitButton = new Rectangle(Game.width / 2 - 50, Game.height / 3 + 275, 100, 50);
 
     public void render(Graphics graphics) {
-      Graphics2D graphics2D = (Graphics2D)graphics;
+        Graphics2D graphics2D = (Graphics2D)graphics;
         graphics.drawImage(Assets.mainManuBackground, 0, 0, Game.width, Game.height, null);
         Font fontTitle = new Font("ariel", Font.BOLD, 50);
         graphics.setFont(fontTitle);
