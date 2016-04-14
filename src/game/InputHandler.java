@@ -40,6 +40,9 @@ public class InputHandler implements KeyListener{
         if (code == KeyEvent.VK_SPACE) {
             Ball.isRelease=true;
         }
+        if (code == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        }
 
     }
 
