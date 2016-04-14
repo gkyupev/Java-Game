@@ -1,5 +1,7 @@
 package game;
 
+import gfx.Assets;
+
 import java.awt.*;
 
 public class Table {
@@ -35,8 +37,7 @@ public class Table {
     }
 
     public void render(Graphics graphics) {
-        graphics.setColor(Color.white);
-        graphics.fillRect(this.rectX, this.rectY, this.rectWidth, this.rectHeight);
+        graphics.drawImage(Assets.paddle, this.rectX, this.rectY, this.rectWidth, this.rectHeight, null);
      graphics.drawRect(boundingBox.x,boundingBox.y,boundingBox.width,boundingBox.height);
     }
 

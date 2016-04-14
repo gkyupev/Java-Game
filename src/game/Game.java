@@ -2,6 +2,7 @@ package game;
 
 import GameObjects.Ball;
 import display.Display;
+import gfx.Assets;
 import gfx.ImageLoader;
 
 import java.awt.*;
@@ -37,7 +38,8 @@ public class Game implements Runnable {
     }
 
     public void init() {
-       wall=new BrickWall();
+        Assets.Init();
+        wall=new BrickWall();
         wall.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
         this.display = new Display(this.title, this.width, this.height);
         this.inputHandler = new InputHandler(this.display);
@@ -131,12 +133,7 @@ public class Game implements Runnable {
             e.printStackTrace();
         }
     }
-//    private void ballHitBrick(){
-//      for (Bricks brick : wall.getWall()) {
-//        if (brick.boundingBox.contains(this.ball.getBoundingBox()) || this.ball.getBoundingBox().contains(brick.boundingBox)){
-//            brick.getHit();
-//        }
-//    }
+
 
 
 }
