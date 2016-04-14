@@ -1,6 +1,8 @@
 package game;
 
 import GameObjects.Ball;
+import UserInterface.MainMenu;
+import UserInterface.MouseInput;
 import display.Display;
 import gfx.Assets;
 import gfx.ImageLoader;
@@ -10,26 +12,27 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
 public class Game implements Runnable {
-
+    public static int width, height;
+    public static Table table;
+    public static GameState State = GameState.MainMenu;
     private Thread thread;
 
     private String title;
-    private int width, height;
+
     private boolean isRunning;
-    public static int lives =3;
+    private MouseInput mouseInput;
     private Display display;
     private InputHandler inputHandler;
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
     private Ball ball;
-    private int startPositionBricksX=50;
-    private int getStartPositionBricksY=50;
-   private BrickWall wall;
+    private int startPositionBricksX = 50;
+    private int getStartPositionBricksY = 50;
+    private BrickWall wall;
     private Image background;
-    private int hightBricks=40;
-    private int wightBricks=10;
-//    public static Rectangle rectangle;
-    public static Table table;
+    private int hightBricks = 40;
+    private int wightBricks = 10;
+private MainMenu mainMenu ;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -39,20 +42,23 @@ public class Game implements Runnable {
 
     public void init() {
         Assets.Init();
-        wall=new BrickWall();
-        wall.fillBricks(startPositionBricksX,getStartPositionBricksY,hightBricks,wightBricks,64);
+        wall = new BrickWall();
+        wall.fillBricks(startPositionBricksX, getStartPositionBricksY, hightBricks, wightBricks, 64);
         this.display = new Display(this.title, this.width, this.height);
         this.inputHandler = new InputHandler(this.display);
-         this.background=ImageLoader.loadImage("/background.jpg");
+        this.mouseInput = new MouseInput(this.display);
+        this.background = ImageLoader.loadImage("/background.jpg");
         table = new Table();
-        ball=new Ball(this.table,this.wall);
-
+        ball = new Ball(this.table, this.wall);
+      mainMenu=new MainMenu();
     }
 
     public void tick() {
-       table.tick();
-      ball.tick();
-       wall.tick();
+        if (State == GameState.Game) {
+            table.tick();
+            ball.tick();
+            wall.tick();
+        }
 
     }
 
@@ -66,18 +72,15 @@ public class Game implements Runnable {
 
         this.graphics = this.bufferStrategy.getDrawGraphics();
         this.graphics.clearRect(0, 0, this.width, this.height);
+        if (State == GameState.Game) {
+            this.graphics.drawImage(this.background, 0, 0, this.width, this.height, null);
+            table.render(graphics);
+            ball.render(graphics);
+            wall.render(graphics);
+        }else if(State==GameState.MainMenu){
+            mainMenu.render(graphics);
 
-        this.graphics.drawImage(this.background, 0, 0, this.width, this.height, null);
-
-
-        //Table t = new Table(100, 100, 20, 200);
-        //this.graphics.fillRect(t.rectangle.x, t.rectangle.y, t.rectangle.width, t.rectangle.height);
-
-        //this.graphics.fillRect(350, 550, 100, 20);
-        table.render(graphics);
-        ball.render(graphics);
-        wall.render(graphics);
-        //System.out.println("render");
+        }
 
         this.graphics.dispose();
         this.bufferStrategy.show();
@@ -97,6 +100,11 @@ public class Game implements Runnable {
         int ticks = 0;
 
         while (isRunning) {
+            try {
+                Thread.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
@@ -107,11 +115,11 @@ public class Game implements Runnable {
                 render();
                 ticks++;
                 delta--;
-           }
+            }
 
             if (timer >= 1_000_000_000) {
-             //   System.out.println("Ticks and Frames: " + ticks);
-               ticks = 0;
+                //   System.out.println("Ticks and Frames: " + ticks);
+                ticks = 0;
                 timer = 0;
             }
         }
@@ -133,7 +141,6 @@ public class Game implements Runnable {
             e.printStackTrace();
         }
     }
-
 
 
 }
