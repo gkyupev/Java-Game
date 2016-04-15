@@ -20,7 +20,7 @@ public class Ball {
     private BrickWall wall;
     public static boolean isRelease = false;
     private Table table;
-
+    private boolean isBounced = false;
 
     public Ball(Table table, BrickWall wall) {
         this.table = table;
@@ -47,12 +47,12 @@ public class Ball {
             this.y = table.getRectY() - 20;
         } else {
             bounceOfTable();
-           fall();
+            fall();
             this.x += velocityX * directionX;
             this.y += velocityY * directionY;
 
             if ((x >= 790) || (x <= 0)) {
-                // velocityX=10;
+                isBounced = false;
                 velocityY = 10;
                 directionX *= -1;
             }
@@ -66,46 +66,59 @@ public class Ball {
 
     public void render(Graphics graf) {
         graf.drawImage(Assets.ball, this.x, this.y, 20, 20, null);
-//        graf.setColor(Color.red);
-//        graf.fillOval(this.x, this.y, 20, 20);
-        graf.drawRect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
     }
 
     public void bounceOfTop() {
 
+        isBounced = false;
         directionY = -1 * directionY;
-        velocityY = 10;
+        //  velocityY = 10;
         System.out.println(directionY);
         System.out.println(velocityY);
 
     }
 
     private void bounceOfTable() {
-        if (this.boundingBox.contains(table.getBoundingBox()) || table.getBoundingBox().contains(this.boundingBox)) {
-            velocityCorrection = Math.abs((this.boundingBox.getMinX() + 10) - (this.table.getBoundingBox().getMinX() + 25));
+        if (this.boundingBox.intersects(table.getBoundingBox()) || table.getBoundingBox().intersects(this.boundingBox)) {
+            velocityCorrection = Math.abs((this.boundingBox.getMinX() + 10) - (this.table.getBoundingBox().getMinX() + 50));
 
-            System.out.println(velocityCorrection);
-            // velocityY = 6;
-            directionY = -1 * directionY;
-            System.out.println(directionY);
-            System.out.println(velocityY);
-            System.out.println("col");
+            if (!isBounced) {
+                Assets.bounce.setFramePosition(0);
+                Assets.bounce.loop(0);
+                System.out.println(velocityCorrection);
+                if (velocityCorrection >= 30) {
+                    velocityY = 6;
+                } else if (velocityCorrection < 30 && velocityCorrection > 10) {
+                    velocityY = 10;
+                } else if (velocityCorrection <= 10) {
+                    velocityY = 16;
+                }
+
+                directionY = -1 * directionY;
+                isBounced = true;
+            }
+
         }
     }
 
     private void bounceOfBrick() {
         for (Bricks brick : this.wall.getWall()) {
             if (this.boundingBox.intersects(brick.boundingBox) || brick.boundingBox.intersects(this.boundingBox)) {
+                isBounced = false;
+                Assets.brickBreak.setFramePosition(0);
+                Assets.brickBreak.loop(0);
                 brick.getHit();
                 GUI.getInstance().setScores(brick.getScore());
                 directionY *= -1;
+                velocityY = 10;
             }
 
         }
     }
-    private void fall(){
-        if (y>600){
-            isRelease=false;
+
+    private void fall() {
+        if (y > 600) {
+            isRelease = false;
             GUI.getInstance().setBalls();
 
         }
