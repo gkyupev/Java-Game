@@ -38,7 +38,7 @@ public class Table {
 
     public void render(Graphics graphics) {
         graphics.drawImage(Assets.paddle, this.rectX, this.rectY, this.rectWidth, this.rectHeight, null);
-     graphics.drawRect(boundingBox.x,boundingBox.y,boundingBox.width,boundingBox.height);
+
     }
 
     public int getRectX() {

@@ -30,4 +30,6 @@ public class MainMenu {
         graphics2D.draw(helpButton);
         graphics2D.draw(quitButton);
     }
+
+
 }

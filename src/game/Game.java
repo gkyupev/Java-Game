@@ -42,19 +42,27 @@ public class Game implements Runnable {
         this.display = new Display(this.title, this.width, this.height);
         this.inputHandler = new InputHandler(this.display);
         this.mouseInput = new MouseInput(this.display);
-        this.background = ImageLoader.loadImage("/background.jpg");
+        this.background = Assets.getBackground();
         table = new Table();
         ball = new Ball(this.table, this.wall);
         mainMenu = new MainMenu();
         pauseMenu = new PauseMenu();
         gameOver = new GameOver();
+        Assets.mainMenuThema.setFramePosition(0);
+        Assets.mainMenuThema.loop(3);
+
     }
 
     public void tick() {
-       if (restart){
-           this.wall.fillBricks();
-       }
+
+      changeLevel();
         if (State == GameState.Game) {
+            if (restart){
+                this.background = Assets.getBackground();
+                this.wall.fillBricks();
+               this.ball=new Ball(table,wall);
+                restart =false;
+            }
             table.tick();
             ball.tick();
             wall.tick();
@@ -152,6 +160,17 @@ public static void restart(){
     table=new Table();
     Ball.isRelease=false;
     restart=true;
-}
 
+    State=GameState.Game;
+}
+private void changeLevel(){
+  if (this.wall.getWall().size()<=0) {
+      GUI.getInstance().setLevel();
+     this.wall.fillBricks();
+      table = new Table();
+      this.ball=new Ball(table,wall);
+      Ball.isRelease=false;
+      this.background = Assets.getBackground();
+  }
+}
 }

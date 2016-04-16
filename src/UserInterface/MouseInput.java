@@ -3,6 +3,7 @@ package UserInterface;
 import display.Display;
 import game.Game;
 import game.GameState;
+import gfx.Assets;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -29,6 +30,7 @@ public class MouseInput implements MouseListener {
             if (mouseX > Game.width / 2 - 50 && mouseX < Game.width / 2 + 50) {
                 if (mouseY > Game.height / 3 + 75 && mouseY < Game.height + 125) {
                     Game.State = GameState.Game;
+                    Assets.mainMenuThema.stop();
                 }
             }
             //Help
@@ -50,7 +52,22 @@ public class MouseInput implements MouseListener {
                 }
             }
         }
+        else if (Game.State == GameState.GameOver) {
+            if (mouseX > 620 && mouseX < 750) {
+                if (mouseY > 455 && mouseY < 508) {
+                    System.exit(0);
+                }
+            }
+
+            if (mouseX > 45 && mouseX < 245) {
+                if (mouseY > 455 && mouseY < 508) {
+                    Game.restart();
+
+                }
+            }
+        }
     }
+
     @Override
     public void mouseReleased(MouseEvent e) {
 

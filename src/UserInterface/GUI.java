@@ -29,6 +29,10 @@ public class GUI {
         return level;
     }
 
+    public void setLevel() {
+        this.level ++;
+    }
+
     public void setScores(int scorestoAdd) {
         scores += scorestoAdd;
     }
@@ -36,7 +40,9 @@ public class GUI {
     public void tick() {
         if (balls <= 0) {
             Game.State = GameState.GameOver;
-        }
+            Assets.gameOverSound.setFramePosition(0);
+            Assets.gameOverSound.loop(0);
+    }
     }
 
     public void setBalls() {

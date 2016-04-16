@@ -9,6 +9,6 @@ public class HardestBrick extends Bricks {
     public HardestBrick(int x, int y ) {
         super(x, y);
         this.hitPoint=3;
-        this.img= ImageLoader.loadImage("/bricks.png");
+
     }
 }

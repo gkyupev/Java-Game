@@ -117,8 +117,10 @@ public class Ball {
     }
 
     private void fall() {
-        if (y > 600) {
+        if (y > 620) {
             isRelease = false;
+            this.directionX = 1;
+            this.directionY = -1;
             GUI.getInstance().setBalls();
 
         }
