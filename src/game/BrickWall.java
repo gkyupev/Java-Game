@@ -1,5 +1,7 @@
 package game;
 
+import UserInterface.GUI;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 public class BrickWall {
     private ArrayList<Bricks> wall;
 
-    public BrickWall() {
+    public  BrickWall() {
         this.wall = new ArrayList<>();
     }
 
@@ -36,23 +38,32 @@ public class BrickWall {
                 bricks.drawBrick(graf);
             }
     }
-    public void fillBricks(int x,int y, int hight,int wight,int numberOfBricks) {
-
-        int endOfTheLine = x;
-        int numberBrickOnLine = 15;
-        int countLine = 0;
-        for (int i = 0; i < numberOfBricks; i++) {
-            if (countLine == numberBrickOnLine) {
-                y += 25;
-                x = endOfTheLine + 50;
-                endOfTheLine = x;
-                numberBrickOnLine -= 2;
-                countLine = 0;
-            }
-             wall.add(new Bricks(x, y, wight, hight));
-
-            x += 45;
-            countLine++;
+    public void fillBricks() {
+        switch (GUI.getInstance().getLevel()){
+            case 1 : this.lavel1Wall();
+                break;
         }
+
     }
+private void lavel1Wall(){
+    int numberOfBricks=64;
+    int x= 50;
+    int y = 50;
+    int endOfTheLine = x;
+    int numberBrickOnLine = 15;
+    int countLine = 0;
+    for (int i = 0; i < numberOfBricks; i++) {
+        if (countLine == numberBrickOnLine) {
+            y += 25;
+            x = endOfTheLine + 50;
+            endOfTheLine = x;
+            numberBrickOnLine -= 2;
+            countLine = 0;
+        }
+        wall.add(new Bricks(x, y));
+
+        x += 45;
+        countLine++;
+    }
+}
 }
