@@ -1,9 +1,10 @@
 package UserInterface;
 
+import Interfaces.Displayable;
 import display.Display;
-import game.Game;
-import game.GameState;
-import gfx.Assets;
+import Game.Game;
+import Game.GameState;
+import FX.Assets;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,7 +13,7 @@ import java.awt.event.MouseListener;
  * Created by vb on 14.4.2016 г..
  */
 public class MouseInput implements MouseListener {
-    public MouseInput(Display display) {
+    public MouseInput(Displayable display) {
         display.getCanvas().addMouseListener(this);
     }
 
@@ -20,28 +21,26 @@ public class MouseInput implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
         int mouseX = e.getX();
         int mouseY = e.getY();
         //Play
         if (Game.State == GameState.MainMenu) {
-            if (mouseX > Game.width / 2 - 50 && mouseX < Game.width / 2 + 50) {
-                if (mouseY > Game.height / 3 + 75 && mouseY < Game.height + 125) {
+            if (mouseX >350 && mouseX < 450) {
+                if (mouseY > 275 && mouseY < 325) {
                     Game.State = GameState.Game;
                     Assets.mainMenuThema.stop();
                 }
             }
-            //Help
-            if (mouseX > Game.width / 2 + 150 && mouseX < Game.width / 2 + 250) {
-                if (mouseY > Game.height / 3 + 175 && mouseY < Game.height + 225) {
-                    // TODO: 14.4.2016 г.
+            if (mouseX > 320 && mouseX < 505) {
+                if (mouseY > 375 && mouseY < 425) {
+                   MainMenu.isViewHighScores=true;
                 }
             }
             //Quit
-            if (mouseX > Game.width / 2 - 50 && mouseX < Game.width / 2 + 50) {
-                if (mouseY > Game.height / 3 + 275 && mouseY < Game.height + 325) {
+            if (mouseX > 350 && mouseX < 450) {
+                if (mouseY > 475 && mouseY < 525) {
                     System.exit(0);
                 }
             }

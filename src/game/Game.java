@@ -1,33 +1,41 @@
-package game;
+package Game;
 
-import GameObjects.Ball;
+import Entities.Ball;
+import Entities.BrickWall;
+import Entities.Table;
+import Interfaces.*;
 import UserInterface.*;
+import com.sun.org.apache.regexp.internal.RE;
 import display.Display;
-import gfx.Assets;
-import gfx.ImageLoader;
+import FX.Assets;
+
 
 import java.awt.*;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
-    public static int width, height;
-    private static   Table table;
     public static GameState State = GameState.MainMenu;
-  private static boolean restart =false;
+    public static String PlayerName;
+    public static HighScores highScores;
+    private int width, height;
+    private static Board table;
+    private static boolean restart = false;
     private Thread thread;
     private String title;
     private boolean isRunning;
-    private MouseInput mouseInput;
-    private Display display;
-    private InputHandler inputHandler;
+    private MouseListener mouseInput;
+    private KeyListener inputHandler;
+    private Displayable display;
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
-    private Ball ball;
-    private BrickWall wall;
+    private GameBall ball;
+    private Wall wall;
     private Image background;
-    private MainMenu mainMenu;
-    private PauseMenu pauseMenu;
-    private GameOver gameOver;
+    private Renderable mainMenu;
+    private Renderable pauseMenu;
+    private Renderable gameOver;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -37,31 +45,31 @@ public class Game implements Runnable {
 
     public void init() {
         Assets.Init();
-        wall = new BrickWall();
-        wall.fillBricks();
         this.display = new Display(this.title, this.width, this.height);
         this.inputHandler = new InputHandler(this.display);
         this.mouseInput = new MouseInput(this.display);
         this.background = Assets.getBackground();
         table = new Table();
+        wall = new BrickWall(this.table);
+        wall.fillWall();
         ball = new Ball(this.table, this.wall);
-        mainMenu = new MainMenu();
-        pauseMenu = new PauseMenu();
-        gameOver = new GameOver();
+        this.mainMenu = new MainMenu();
+        this.pauseMenu = new PauseMenu();
+        this.gameOver = new GameOver();
+        this.highScores = new HighScores();
         Assets.mainMenuThema.setFramePosition(0);
         Assets.mainMenuThema.loop(3);
-
+        //  highScores=new HighScores();
     }
 
     public void tick() {
-
-      changeLevel();
+        changeLevel();
         if (State == GameState.Game) {
-            if (restart){
+            if (restart) {
                 this.background = Assets.getBackground();
-                this.wall.fillBricks();
-               this.ball=new Ball(table,wall);
-                restart =false;
+                this.wall.fillWall();
+                this.ball = new Ball(table, wall);
+                restart = false;
             }
             table.tick();
             ball.tick();
@@ -77,7 +85,6 @@ public class Game implements Runnable {
             this.display.getCanvas().createBufferStrategy(2); //    - test 1 or 3 for best work
             this.bufferStrategy = this.display.getCanvas().getBufferStrategy();
         }
-
         this.graphics = this.bufferStrategy.getDrawGraphics();
         this.graphics.clearRect(0, 0, this.width, this.height);
         if (State == GameState.Game || State == GameState.PauseMenu) {
@@ -94,16 +101,13 @@ public class Game implements Runnable {
         } else if (State == GameState.GameOver) {
             gameOver.render(graphics);
         }
-
         this.graphics.dispose();
         this.bufferStrategy.show();
-
     }
 
     @Override   // - "implements Runnable" - Creating Threads and Loops
     public void run() {
         this.init();
-
         int fps = 30;
         double timePerTick = 1_000_000_000.0 / fps;
         double delta = 0;
@@ -131,15 +135,12 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1_000_000_000) {
-                //   System.out.println("Ticks and Frames: " + ticks);
                 ticks = 0;
                 timer = 0;
             }
         }
-
         this.stop();
     }
-
 
     public synchronized void start() {
         thread = new Thread(this);
@@ -155,22 +156,29 @@ public class Game implements Runnable {
             e.printStackTrace();
         }
     }
-public static void restart(){
-    GUI.getInstance().Reset();
-    table=new Table();
-    Ball.isRelease=false;
-    restart=true;
 
-    State=GameState.Game;
-}
-private void changeLevel(){
-  if (this.wall.getWall().size()<=0) {
-      GUI.getInstance().setLevel();
-     this.wall.fillBricks();
-      table = new Table();
-      this.ball=new Ball(table,wall);
-      Ball.isRelease=false;
-      this.background = Assets.getBackground();
-  }
-}
+    public static void restart() {
+        GUI.getInstance().Reset();
+        table = new Table();
+        Ball.isRelease = false;
+        restart = true;
+
+        State = GameState.Game;
+    }
+
+    private void changeLevel() {
+        if (this.wall.getWall().size() <= 0) {
+            GUI.getInstance().setLevel();
+            if (GUI.getInstance().getLevel() % 3 == 0) {
+                this.ball.changeSpeed();
+            }
+
+            this.wall.fillWall();
+            table = new Table();
+            this.ball.setTable(table);
+            this.ball.setWall(wall);
+            this.background = Assets.getBackground();
+            Ball.isRelease = false;
+        }
+    }
 }

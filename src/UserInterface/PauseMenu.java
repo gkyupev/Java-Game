@@ -1,15 +1,12 @@
 package UserInterface;
-
-
-
-
+import Interfaces.Renderable;
 
 import java.awt.*;
 
 /**
  * Created by vb on 14.4.2016 г..
  */
-public class PauseMenu {
+public class PauseMenu implements Renderable {
     public Rectangle quitButton = new Rectangle(350,300, 100, 50);
     private Color transparentBlue = new Color(0f,0f,1f,.75f);
 

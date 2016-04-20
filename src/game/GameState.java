@@ -1,4 +1,4 @@
-package game;
+package Game;
 
 /**
  * Created by vb on 14.4.2016 г..

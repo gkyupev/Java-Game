@@ -1,8 +1,8 @@
 package UserInterface;
 
-import game.Game;
-import game.GameState;
-import gfx.Assets;
+import Game.Game;
+import Game.GameState;
+import FX.Assets;
 
 import java.awt.*;
 
@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class GUI {
     private int balls = 3;
-    private int level = 1;
+    private int level = 0;
     private int scores = 0;
     private static GUI instance = null;
 
@@ -28,9 +28,13 @@ public class GUI {
     public int getLevel() {
         return level;
     }
-
     public void setLevel() {
         this.level ++;
+    }
+
+    public void ballsUP() {
+       if (balls<11)
+        this.balls++;
     }
 
     public void setScores(int scorestoAdd) {
@@ -40,6 +44,7 @@ public class GUI {
     public void tick() {
         if (balls <= 0) {
             Game.State = GameState.GameOver;
+            Game.highScores.save(this.scores,Game.PlayerName);
             Assets.gameOverSound.setFramePosition(0);
             Assets.gameOverSound.loop(0);
     }
@@ -60,11 +65,11 @@ public class GUI {
         graphics.setFont(fontTitle);
         graphics.setColor(Color.WHITE);
         graphics.drawString(String.format("Scores:%d", scores), 360, 30);
-        graphics.drawString(String.format("Level:%d", level), 700, 30);
+        graphics.drawString(String.format("Level:%d", level+1), 700, 30);
     }
-    public  void Reset(){
+    public void Reset(){
         this.balls=3;
-        this.level=1;
+        this.level=0;
         this.scores=0;
     }
 }
