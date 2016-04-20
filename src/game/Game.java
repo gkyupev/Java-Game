@@ -68,6 +68,7 @@ public class Game implements Runnable {
             if (restart) {
                 this.background = Assets.getBackground();
                 this.wall.fillWall();
+              this.wall.getBonusItems().clear();
                 this.ball = new Ball(table, wall);
                 restart = false;
             }
@@ -174,6 +175,7 @@ public class Game implements Runnable {
             }
 
             this.wall.fillWall();
+            this.wall.getBonusItems().clear();
             table = new Table();
             this.ball.setTable(table);
             this.ball.setWall(wall);

@@ -19,5 +19,6 @@ public class BonusLive extends BonusItem implements Item {
    public void takeEffect() {
         GUI.getInstance().ballsUP();
         this.activate(false);
+
     }
 }
