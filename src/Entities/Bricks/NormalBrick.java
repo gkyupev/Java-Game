@@ -1,10 +1,10 @@
-package Entities.Bricks;
+package entities.Bricks;
 
 import FX.Assets;
-import Interfaces.Board;
-import Interfaces.Brick;
-import Interfaces.Collidable;
-import Interfaces.Wall;
+import interfaces.Board;
+import interfaces.Brick;
+import interfaces.Collidable;
+import interfaces.Wall;
 
 import java.awt.*;
 

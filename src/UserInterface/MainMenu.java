@@ -1,13 +1,11 @@
-package UserInterface;
+package userInterface;
 
 import Game.Game;
 import FX.Assets;
 
-import Interfaces.Renderable;
+import interfaces.Renderable;
 
-import javax.swing.*;
 import java.awt.*;
-import java.util.Collections;
 
 /**
  * Created by vb on 14.4.2016 г..

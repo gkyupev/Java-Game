@@ -1,10 +1,10 @@
-package Entities;
+package entities;
 
 import FX.Assets;
-import Interfaces.Board;
-import Interfaces.Collidable;
-import Interfaces.Renderable;
-import Interfaces.Tickable;
+import interfaces.Board;
+import interfaces.Collidable;
+import interfaces.Renderable;
+import interfaces.Tickable;
 
 import java.awt.*;
 

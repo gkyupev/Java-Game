@@ -1,5 +1,5 @@
-package UserInterface;
-import Interfaces.Renderable;
+package userInterface;
+import interfaces.Renderable;
 
 import java.awt.*;
 

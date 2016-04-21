@@ -1,11 +1,9 @@
 
-package Entities.BonusItems;
+package entities.BonusItems;
 
-import Game.Game;
-import Interfaces.Board;
-import Interfaces.Collidable;
-import Interfaces.Renderable;
-import Interfaces.Tickable;
+import interfaces.Board;
+import interfaces.Renderable;
+import interfaces.Tickable;
 
 
 import java.awt.*;

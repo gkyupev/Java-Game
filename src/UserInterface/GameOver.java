@@ -1,9 +1,8 @@
-package UserInterface;
+package userInterface;
 
-import Game.Game;
 import FX.Assets;
 
-import Interfaces.Renderable;
+import interfaces.Renderable;
 
 import java.awt.*;
 

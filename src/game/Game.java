@@ -1,10 +1,10 @@
 package Game;
 
-import Entities.Ball;
-import Entities.BrickWall;
-import Entities.Table;
-import Interfaces.*;
-import UserInterface.*;
+import entities.Ball;
+import entities.BrickWall;
+import entities.Table;
+import interfaces.*;
+import userInterface.*;
 import display.Display;
 import FX.Assets;
 

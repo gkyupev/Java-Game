@@ -1,7 +1,7 @@
-package Entities.BonusItems;
+package entities.BonusItems;
 
-import Interfaces.Board;
-import Interfaces.Item;
+import interfaces.Board;
+import interfaces.Item;
 
 import java.awt.image.BufferedImage;
 

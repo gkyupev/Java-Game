@@ -1,7 +1,7 @@
 package display;
 
 import Game.Game;
-import Interfaces.Displayable;
+import interfaces.Displayable;
 
 import javax.swing.*;
 import java.awt.*;

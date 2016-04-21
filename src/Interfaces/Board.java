@@ -1,6 +1,4 @@
-package Interfaces;
-
-import java.awt.*;
+package interfaces;
 
 /**
  * Created by vb on 20.4.2016 г..

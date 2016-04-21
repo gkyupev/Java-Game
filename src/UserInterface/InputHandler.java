@@ -1,9 +1,8 @@
-package UserInterface;
+package userInterface;
 
-import Entities.Ball;
-import Entities.Table;
-import Interfaces.Displayable;
-import display.Display;
+import entities.Ball;
+import entities.Table;
+import interfaces.Displayable;
 import Game.Game;
 import Game.GameState;
 

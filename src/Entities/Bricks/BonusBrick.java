@@ -1,10 +1,10 @@
-package Entities.Bricks;
-import Entities.BonusItems.BonusLive;
-import Entities.BonusItems.ExtendTable;
+package entities.Bricks;
+import entities.BonusItems.BonusLive;
+import entities.BonusItems.ExtendTable;
 import FX.Assets;
-import Interfaces.Board;
-import Interfaces.Item;
-import Interfaces.Wall;
+import interfaces.Board;
+import interfaces.Item;
+import interfaces.Wall;
 import java.awt.*;
 import java.util.Random;
 

@@ -1,8 +1,7 @@
-package Entities.Bricks;
+package entities.Bricks;
 
-import Interfaces.Board;
-import Interfaces.Collidable;
-import Interfaces.Wall;
+import interfaces.Board;
+import interfaces.Wall;
 
 /**
  * Created by vb on 13.4.2016 г..

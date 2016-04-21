@@ -1,7 +1,7 @@
-package Entities;
+package entities;
 
-import Interfaces.*;
-import UserInterface.GUI;
+import interfaces.*;
+import userInterface.GUI;
 import FX.Assets;
 
 import java.awt.*;

@@ -17,7 +17,7 @@ public class HighScores {
         if (!highScores.containsKey(scores)) {
             highScores.put(scores, name);
             if (highScores.keySet().size() > 10) {
-                highScores.remove(Arrays.asList(highScores.keySet().toArray()).get(11));
+                highScores.remove(Arrays.asList(highScores.keySet().toArray()).get(0));
             }
         }
 

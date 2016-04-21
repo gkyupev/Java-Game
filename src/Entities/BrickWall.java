@@ -1,14 +1,14 @@
-package Entities;
+package entities;
 
-import Entities.Bricks.BonusBrick;
-import Entities.Bricks.NormalBrick;
-import Entities.Bricks.HarderBrick;
-import Entities.Bricks.HardestBrick;
-import Interfaces.Board;
-import Interfaces.Brick;
-import Interfaces.Item;
-import Interfaces.Wall;
-import UserInterface.GUI;
+import entities.Bricks.BonusBrick;
+import entities.Bricks.NormalBrick;
+import entities.Bricks.HarderBrick;
+import entities.Bricks.HardestBrick;
+import interfaces.Board;
+import interfaces.Brick;
+import interfaces.Item;
+import interfaces.Wall;
+import userInterface.GUI;
 
 import java.awt.*;
 import java.util.*;

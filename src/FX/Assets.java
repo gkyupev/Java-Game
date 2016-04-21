@@ -1,6 +1,6 @@
 package FX;
 
-import UserInterface.GUI;
+import userInterface.GUI;
 
 import javax.sound.sampled.Clip;
 import java.awt.image.BufferedImage;

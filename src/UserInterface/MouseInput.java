@@ -1,7 +1,6 @@
-package UserInterface;
+package userInterface;
 
-import Interfaces.Displayable;
-import display.Display;
+import interfaces.Displayable;
 import Game.Game;
 import Game.GameState;
 import FX.Assets;
