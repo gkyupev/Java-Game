@@ -171,7 +171,8 @@ public class Game implements Runnable {
             if (GUI.getInstance().getLevel() % 3 == 0) {
                 this.ball.changeSpeed();
             }
-
+            table.midPosition();
+            this.ball.stickToBorad();
             this.wall.buildWall();
             table.midPosition();
             this.ball.setTable(table);

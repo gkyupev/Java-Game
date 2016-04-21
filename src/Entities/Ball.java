@@ -69,6 +69,10 @@ public class Ball implements GameBall, Tickable, Renderable {
         }
         this.boundingBox.setBounds((int) this.x, (int) this.y, 20, 20);
     }
+public void stickToBorad(){
+    this.x = table.getRectX() + 40;
+    this.y = table.getRectY() - 20;
+}
 
     public void render(Graphics graf) {
         graf.drawImage(Assets.ball, (int) this.x, (int) this.y, 20, 20, null);
@@ -77,7 +81,8 @@ public class Ball implements GameBall, Tickable, Renderable {
 
     private void bounceOfTable() {
         if (this.boundingBox.intersects(table.getBoundingBox()) || table.getBoundingBox().intersects(this.boundingBox)) {
-            velocityCorrection = Math.abs((this.boundingBox.getMinX() + 10) - (this.table.getBoundingBox().getMinX() + 50));
+            velocityCorrection = Math.abs((this.boundingBox.getMinX() + 10) -
+                    (this.table.getBoundingBox().getMinX() + this.table.getRectWidth()/2));
             if (!isBounced) {
                 Assets.bounce.setFramePosition(0);
                 Assets.bounce.loop(0);
@@ -150,6 +155,6 @@ public class Ball implements GameBall, Tickable, Renderable {
     }
 
     public void changeSpeed() {
-        speed = speed + (GUI.getInstance().getLevel() / 3) * 5;
+        speed = 15 + (GUI.getInstance().getLevel() / 3) * 5;
     }
 }
