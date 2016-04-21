@@ -31,7 +31,7 @@ public class BonusBrick extends NormalBrick {
 
     @Override
     public void render(Graphics g) {
-        super.render(g);
+     //   super.render(g);
         g.drawImage(Assets.bonusBrick, this.x, this.y, this.WIGHT, this.HIGHT, null);
     }
 

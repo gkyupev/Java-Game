@@ -13,4 +13,5 @@ public interface Board extends Collidable,Tickable,Renderable{
     int getRectWidth();
 
     void setRectWidth(int rectWidth);
+    void  midPosition();
 }

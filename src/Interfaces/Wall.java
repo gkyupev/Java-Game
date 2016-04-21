@@ -11,5 +11,5 @@ public interface Wall extends Tickable, Renderable {
 
     List<Item> getBonusItems();
 
-    void fillWall();
+    void buildWall();
 }

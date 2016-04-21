@@ -64,4 +64,8 @@ public class Table implements Collidable, Tickable, Renderable, Board{
     public void setRectWidth(int rectWidth) {
         this.rectWidth = rectWidth;
     }
+    public void  midPosition(){
+        this.rectX=350;
+    }
+
 }

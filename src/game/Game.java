@@ -5,7 +5,6 @@ import Entities.BrickWall;
 import Entities.Table;
 import Interfaces.*;
 import UserInterface.*;
-import com.sun.org.apache.regexp.internal.RE;
 import display.Display;
 import FX.Assets;
 
@@ -51,7 +50,7 @@ public class Game implements Runnable {
         this.background = Assets.getBackground();
         table = new Table();
         wall = new BrickWall(this.table);
-        wall.fillWall();
+        wall.buildWall();
         ball = new Ball(this.table, this.wall);
         this.mainMenu = new MainMenu();
         this.pauseMenu = new PauseMenu();
@@ -67,8 +66,7 @@ public class Game implements Runnable {
         if (State == GameState.Game) {
             if (restart) {
                 this.background = Assets.getBackground();
-                this.wall.fillWall();
-              this.wall.getBonusItems().clear();
+                this.wall.buildWall();
                 this.ball = new Ball(table, wall);
                 restart = false;
             }
@@ -160,7 +158,7 @@ public class Game implements Runnable {
 
     public static void restart() {
         GUI.getInstance().Reset();
-        table = new Table();
+        table.midPosition();
         Ball.isRelease = false;
         restart = true;
 
@@ -174,9 +172,8 @@ public class Game implements Runnable {
                 this.ball.changeSpeed();
             }
 
-            this.wall.fillWall();
-            this.wall.getBonusItems().clear();
-            table = new Table();
+            this.wall.buildWall();
+            table.midPosition();
             this.ball.setTable(table);
             this.ball.setWall(wall);
             this.background = Assets.getBackground();

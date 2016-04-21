@@ -56,7 +56,7 @@ public class BrickWall implements Wall {
         }
     }
 
-    public void fillWall() {
+    public void buildWall() {
         this.wall.clear();
         switch (GUI.getInstance().getLevel() % 3) {
             case 0:
@@ -112,10 +112,13 @@ public class BrickWall implements Wall {
             if (i < 16 * 5) {
                 wall.add(new NormalBrick(x, y, this,this.table));
                 x += 50;
-            } else if ((i >= 16 * 5) && (i < 16 * 9)) {
+            } else if ((i >= 16 * 5) && (i < 16 * 8)) {
                 wall.add(new HarderBrick(x, y, this,this.table));
                 x += 50;
-            } else {
+            }else if ((i >= 16 * 9) && (i < 16 * 10)) {
+                wall.add(new BonusBrick(x, y, this, this.table));
+                x += 50;
+            }else {
                 wall.add(new HardestBrick(x, y, this,this.table));
                 x += 50;
             }
